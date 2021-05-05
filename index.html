@@ -1,1 +1,98 @@
-Hello World
+<!-- Display the countdown timer in an element -->
+<style>
+  body {
+    background: #333;
+    color: #fff;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 3em;
+    margin-top: 1em;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .heart {
+    background-color: red;
+    display: inline-block;
+    height: 30px;
+    margin: 0 10px;
+    position: relative;
+    top: 0;
+    transform: rotate(-45deg);
+    width: 30px;
+  }
+
+  .heart:before,
+  .heart:after {
+    content: "";
+    background-color: red;
+    border-radius: 50%;
+    height: 30px;
+    position: absolute;
+    width: 30px;
+  }
+
+  .heart:before {
+    top: -15px;
+    left: 0;
+  }
+
+  .heart:after {
+    left: 15px;
+    top: 0;
+  }
+</style>
+<div style="width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center;">
+  <h2>J'ai hâte de te voir, c'est long en yo</h2>
+  </br>
+  <h3>Plus que:</h3>
+  <p style="font-size: 25px;" id="demo">...</p>
+
+  <h1>JE T'AIME</h1>
+  <span class="heart"></span>
+</div>
+
+<script>
+  var countDownDate = new Date("May 17, 2021 00:00:00").getTime();
+  var x = setInterval(function () {
+    document.getElementById("demo").innerHTML = "...";
+    var now = new Date().getTime();
+    var distance = countDownDate - now;
+
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById("demo").innerHTML = days + " jours " + hours + " heures "
+      + minutes + " minutes " + seconds + " secondes ";
+
+    if (distance < 0) {
+      clearInterval(x);
+      document.getElementById("demo").innerHTML = "EXPIRED";
+    }
+  }, 1000);
+
+  $("#header-plugin").load("https://vivinantony.github.io/header-plugin/", function () {
+    $("a.back-to-link").attr("href", "http://blog.thelittletechie.com/2015/03/love-heart-animation-using-css3.html#tlt")
+  });
+
+  var love = setInterval(function () {
+    var r_num = Math.floor(Math.random() * 40) + 1;
+    var r_size = Math.floor(Math.random() * 65) + 10;
+    var r_left = Math.floor(Math.random() * 100) + 1;
+    var r_bg = Math.floor(Math.random() * 25) + 100;
+    var r_time = Math.floor(Math.random() * 5) + 5;
+
+    $('.bg_heart').append("<div class='heart' style='width:" + r_size + "px;height:" + r_size + "px;left:" + r_left + "%;background:rgba(255," + (r_bg - 25) + "," + r_bg + ",1);-webkit-animation:love " + r_time + "s ease;-moz-animation:love " + r_time + "s ease;-ms-animation:love " + r_time + "s ease;animation:love " + r_time + "s ease'></div>");
+
+    $('.bg_heart').append("<div class='heart' style='width:" + (r_size - 10) + "px;height:" + (r_size - 10) + "px;left:" + (r_left + r_num) + "%;background:rgba(255," + (r_bg - 25) + "," + (r_bg + 25) + ",1);-webkit-animation:love " + (r_time + 5) + "s ease;-moz-animation:love " + (r_time + 5) + "s ease;-ms-animation:love " + (r_time + 5) + "s ease;animation:love " + (r_time + 5) + "s ease'></div>");
+
+    $('.heart').each(function () {
+      var top = $(this).css("top").replace(/[^-\d\.]/g, '');
+      var width = $(this).css("width").replace(/[^-\d\.]/g, '');
+      if (top <= -100 || width >= 150) {
+        $(this).detach();
+      }
+    });
+  }, 500);
+</script>
